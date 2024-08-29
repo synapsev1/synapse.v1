@@ -1,0 +1,855 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    flex-direction: column;
+    background-color: #f5f5f5;
+    color: #333;
+    box-sizing: border-box;
+}
+
+header, footer {
+    background-color: #222;
+    color: #fff;
+    padding: 1rem 2rem;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.menu {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.menu a:hover {
+    background-color: #555;
+    color: #fff;
+}
+
+/* Dropdown menu toggle */
+.menu-toggle {
+    display: none;
+    background: #333;
+    color: #fff;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.header-left h1, .header-right nav {
+    margin: 0;
+}
+
+.header-left h1 a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 2rem; /* Adjust as needed */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+
+.header-left h1 a:hover {
+    background-color: #555;
+}
+
+footer {
+    text-align: center;
+    font-size: 0.875rem;
+    margin-top: 2rem;
+}
+
+.container {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    flex-direction: column;
+    min-height: 100vh
+}
+
+/* Button Styles */
+.button, input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 4px;
+}
+
+.button:hover, input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Login Page */
+.login-form {
+    max-width: 400px;
+    margin: 5rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"],
+.login-form input[type="submit"] {
+    width: calc(100% - 2rem);
+    margin: 0.5rem 1rem;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Dashboard Page Styles */
+.dashboard {
+    text-align: center;
+    padding: 2rem;
+}
+
+.dashboard h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #007bff;
+}
+
+.dashboard .links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dashboard .links a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 1.25rem;
+    padding: 1rem 2rem;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: transform 0.3s ease, color 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+.dashboard .links a:hover {
+    color: #0056b3;
+    transform: translateY(-5px);
+}
+
+.dashboard .links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 2px;
+    background-color: #007bff;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.dashboard .links a:hover::after {
+    transform: scaleX(1);
+}
+
+/* Modal Styles */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    max-width: 600px; 
+    border-radius: 10px;
+    animation: modalopen 0.5s;
+    position: relative;
+}
+
+@keyframes modalopen {
+    from {opacity: 0; transform: translateY(-50px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+/* Form Styling */
+/* Form Styling */
+#ticketModal .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#ticketModal .modal-content img#profilePictureFull {
+    width: 100px; /* Adjust size as needed */
+    height: 100px; /* Adjust size as needed */
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+#editTicketForm {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+}
+
+#editTicketForm label {
+    margin: 5px 0;
+}
+
+#editTicketForm input[type="text"],
+#editTicketForm input[type="date"],
+#editTicketForm input[type="time"],
+#editTicketForm input[type="file"] {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#editTicketForm button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #007bff;
+    cursor: pointer;
+}
+
+#editTicketForm button[type="button"] {
+    background-color: #dc3545;
+}
+
+.ticket-list {
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.ticket-container {
+    position: relative;
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin: 10px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.ticket-container:hover {
+    transform: translateY(-5px);
+}
+
+.ticket-container .qr-code {
+    width: 100px;
+    height: 100px;
+}
+
+.ticket-container .ticket-info {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+#clearAll {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 2rem;
+}
+
+/* Form Container */
+.form-container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container form label {
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.form-container form input,
+.form-container form button {
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.form-container form button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.form-container form button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Validation Page */
+/* Invite Code Form Styles */
+.invite-code-container {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.invite-code-container h2 {
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    color: #007bff;
+}
+
+.invite-code-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.invite-code-container input[type="text"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.invite-code-container button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.invite-code-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Modal Styles */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    max-width: 600px; 
+    border-radius: 10px;
+    animation: modalopen 0.5s;
+}
+
+@keyframes modalopen {
+    from { opacity: 0; transform: translateY(-50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: black;
+    text-decoration: none;
+}
+
+#modalMessage {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    header, footer {
+        padding: 1rem;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    header nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    header nav a {
+        padding: 0.5rem 1rem;
+    }
+
+    .container {
+        padding: 1rem;
+    }
+
+    .invite-code-container {
+        padding: 1rem;
+    }
+
+    .invite-code-container h2 {
+        font-size: 1.5rem;
+    }
+
+    .invite-code-container input[type="text"], 
+    .invite-code-container button {
+        width: 100%;
+    }
+}
+
+.validation-result {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.validation-result.valid {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.validation-result.invalid {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.profile-picture {
+    width: 100px; /* Adjust size as needed */
+    height: 100px; /* Ensure it’s squared */
+    object-fit: cover; /* Ensures the image covers the square without distortion */
+    margin: 10px; /* Optional: add space around the image */
+    border: 2px solid #ddd; /* Optional: adds a border around the image */
+}
+
+#ticketPreview {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+#ticketPreview h3 {
+    margin-top: 0;
+}
+
+#ticketPreview p {
+    margin: 5px 0;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black background with opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 5% from top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less depending on screen size */
+    max-width: 1000px;
+    border-radius: 10px;
+    display: flex; /* Flex layout for side-by-side content */
+    gap: 20px; /* Space between preview and form */
+}
+
+/* Modal Close Button */
+.close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+}
+
+/* Ticket Preview Styles */
+#ticketPreviewContainer {
+    flex: 1; /* Takes up remaining space in the modal */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    max-width: 400px; /* Set a max width for the preview */
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#ticketPreview {
+    max-width: 100%; /* Ensure image fits within container */
+    height: auto;
+    border-radius: 4px;
+}
+
+/* Form Styles */
+#editTicketFormContainer {
+    flex: 2; /* Takes up more space compared to the preview */
+    padding: 10px;
+}
+
+#editTicketForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#editTicketForm label {
+    margin-top: 10px;
+}
+
+#editTicketForm input {
+    margin-bottom: 10px;
+    padding: 8px;
+}
+
+.button {
+    margin-top: 10px;
+}
+
+.modal-content {
+    display: flex; /* Arrange children in a row */
+    align-items: flex-start;
+    width: 80%;
+    max-width: 1200px;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-body {
+    display: flex; /* Arrange children in a row */
+}
+
+.edit-form {
+    flex: 1; /* Take up remaining space */
+    margin-right: 20px; /* Space between form and preview */
+}
+
+#ticketPreview {
+    flex: 0 0 50%; /* Adjust container width to fit your layout */
+    max-width: 600px; /* Set a maximum width for the container */
+    height: auto; /* Allow container height to adjust based on content */
+    background-color: #f5f5f5; /* Background color for the preview */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    display: flex; /* Use flexbox to center the image */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+}
+
+/* Style for the ticket image */
+#ticketPreview img {
+    max-width: 100%; /* Ensure image does not exceed container width */
+    max-height: 80vh; /* Adjust height to be a percentage of the viewport height */
+    width: auto; /* Maintain aspect ratio */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.status-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.modal-active .status-indicator {
+    display: none;
+}
+
+.status-pending {
+    background-color: yellow;
+}
+
+.status-validated {
+    background-color: green;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCI+PHBhdGggZD0iTTEuNTQ1IDcuMDA5TDQuMTggMTIuNjY2NkwgNy4wMTcgOC43NTIgQzEuNTQ1IDMuMzUxIDAgMCAxIDAgMCAzLjM1MSA5LjYwNyAxMC42MDEgNy4wMTcgOC43NTIgTCAxLjg4MyA1Ljc4NTFMMTAgMy43ODkgMy42OTcgMy4xMzggNy4wMTdBIDMuNTI0IDMuNTI0IDAgMCAxIDAgMi41MkwgMTIuNzUzIDIuNTk1TCAxLjQ4NSAxLjYxMkMgMy40NTIgMCAzLjc5MSA1LjQ2NCAxMi4yNzUgOC42MDQgNy4wMTcgOC43NTIgTDIuMjg3IDguMTc2QyA3LjAzNCA3LjAwNyA2LjYxNyA2LjI1MiA2LjEwNSA2Ljk2MyAxMC4wNzcgOCAxMC41NiwxLjQ4MyAyLjU3IDUuNTMxTCA3LjAwNiA5LjQyNkwgNy4wMTcgOC43NTJDLiAxLjU0OCA3LjAwMiAxLjUwNyAyLjM1MiA0LjY4M0EgMy41NTIgMy41NTIgMCAwIDAgOS4zMTcgMi4xMzggNS4zMTcgMy4xMjkgQzUuMzg3IDAgMi4xNzYgMy40OTQgMy43ODMgNy4wMTcgOS4zMTdDNCAxLjk4NiA2LjYxNyA5LjcwNyA1Ljc4NSAzLjM1NCAxMC4wMDIgMCAwIEIgMCAwIEIgMi43MTQgMCAwIDAgMi43MTQgMCAwIEI8L3BhdGg+PC9zdmc+');
+    background-size: 10px 10px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.modal-content img#ticketPreviewImage {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+/* Confirmation Modal */
+.modal-content p {
+    margin-bottom: 1rem;
+}
+
+#confirmationModal .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#confirmationModal button {
+    margin: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+}
+
+#confirmYes {
+    background-color: #28a745;
+}
+
+#confirmYes:hover {
+    background-color: #218838;
+}
+
+#confirmNo {
+    background-color: #dc3545;
+}
+
+#confirmNo:hover {
+    background-color: #c82333;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 600px; /* Adjust as necessary */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    position: relative; /* Relative positioning for close button */
+}
+
+/* Image Styling */
+#ticketPreviewImage {
+    width: 100%; /* Responsive width */
+    max-width: 500px; /* Maximum width of the image */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 0 auto; /* Center the image */
+}
+
+/* Modal Close Button */
+.modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.welcome-section {
+    margin-bottom: 2rem;
+}
+
+h2 {
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.button-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    background-color: #444;
+    color: white;
+    padding: 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1.25rem;
+    transition: background-color 0.3s;
+}
+
+.button-item:hover {
+    background-color: #666;
+}
+
+@media (max-width: 768px) {
+    .menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #333;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        padding: 1rem 0;
+    }
+
+    .menu a {
+        padding: 1rem;
+        text-align: center;
+        border-top: 1px solid #555;
+    }
+
+    .menu a:first-child {
+        border-top: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .menu.show {
+        display: flex;
+    }
+}
+
+/* Responsive design for other elements */
+@media (max-width: 480px) {
+    .header-left h1 a {
+        font-size: 1.5rem;
+    }
+
+    .menu a {
+        font-size: 0.875rem;
+    }
+
+    button, .button-item {
+        padding: 0.75rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+}

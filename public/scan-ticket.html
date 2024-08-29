@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Invite Code - Synapse.V1</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <h1><a href="dashboard.html" class="header-link">Synapse.V1</a></h1>
+        </div>
+        <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
+        <nav class="menu">
+            <a href="create-ticket.html">Create Ticket</a>
+            <a href="scan-ticket.html">Enter Ticket</a>
+            <a href="manage-tickets.html">Manage Tickets</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Enter Invite Code</h2>
+        <div class="invite-code-container">
+            <form id="inviteCodeForm">
+                <label for="inviteCode">Invite Code:</label>
+                <input type="text" id="inviteCode" name="inviteCode" required>
+                <button type="submit">Verify</button>
+            </form>
+        </div>
+        
+        <!-- Ticket Preview Modal -->
+        <div id="ticketPreviewModal" class="modal">
+            <div class="modal-content">
+                <span class="modal-close" id="ticketPreviewClose">&times;</span>
+                <h2>Ticket Preview</h2>
+                <img id="ticketPreviewImage" src="" alt="Ticket Preview">
+                <button id="confirmTicketButton" class="button">Confirm</button>
+            </div>
+        </div>
+        
+        <!-- Confirmation Modal -->
+        <div id="confirmationModal" class="modal">
+            <div class="modal-content">
+                <span class="modal-close" id="confirmationClose">&times;</span>
+                <h2>Are you sure?</h2>
+                <p>Please confirm if you want to proceed with this ticket.</p>
+                <button id="confirmYes" class="button">Yes</button>
+                <button id="confirmNo" class="button">No</button>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Result Modal -->
+    <div id="resultModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <div id="modalMessage"></div>
+        </div>
+    </div>
+
+    <script src="js/enter-invite-code.js"></script>
+</body>
+<footer>
+    Designed and Maintained by Unknown Leaf, All terms and Conditions applied
+</footer>
+</html>

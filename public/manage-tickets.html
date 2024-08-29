@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Tickets - Synapse.V1</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <h1><a href="dashboard.html" class="header-link">Synapse.V1</a></h1>
+        </div>
+        <button class="menu-toggle" aria-label="Toggle Menu">&#9776;</button>
+        <nav class="menu">
+            <a href="create-ticket.html">Create Ticket</a>
+            <a href="scan-ticket.html">Enter Ticket</a>
+            <a href="manage-tickets.html">Manage Tickets</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h2>Manage Tickets</h2>
+        <div class="ticket-list" id="ticketList"></div>
+        <button id="clearAll">Clear All</button>
+    </div>
+    <footer>
+        Designed and Maintained by Unknown Leaf, All terms and Conditions applied
+    </footer>
+    <div id="ticketModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <div class="modal-body">
+                <div class="edit-form">
+                    <div class="status-indicator status-pending" id="status-${attendee.inviteCode}"></div>
+                    <img id="profilePictureFull" class="profile-picture" src="" alt="Profile Picture">
+                    <form id="editTicketForm">
+                        <label for="editName">Name of the person</label>
+                        <input type="text" id="editName" name="name" >
+                        
+                        <label for="editDate">Date of event</label>
+                        <input type="date" id="editDate" name="date" >
+                        
+                        <label for="editTime">Time of event</label>
+                        <input type="time" id="editTime" name="time" >
+                        
+                        <label for="editPurchasedFrom">Pass purchased from</label>
+                        <input type="text" id="editPurchasedFrom" name="purchasedFrom" >
+                        
+                        <label for="editPlace">Place of event</label>
+                        <input type="text" id="editPlace" name="place" >
+
+                        <label for="editPfp">Update Photo</label>
+                        <input type="file" id="profilePicture" name="profilePicture" accept="image/*" >
+                        
+                        <button type="submit" class="button">Save Changes</button>
+                        <button type="button" class="button" onclick="deleteTicket()">Delete Ticket</button>
+                    </form>
+                </div>
+                <div id="ticketPreview">
+                    <!-- Ticket preview will be injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/manage-tickets.js"></script>
+</body>
+</html>

@@ -25,15 +25,15 @@ export default async function handler(req, res) {
     });
 
     const updatedTicket = req.body;
-    const profilePictureBuffer = req.file ? req.file.buffer : updatedTicket.profilePicture ? await loadImage(path.join('data', 'images', 'uploads', updatedTicket.profilePicture)) : null;
+    const profilePictureBuffer = req.file ? req.file.buffer : updatedTicket.profilePicture ? await loadImage(path.join('..', 'data', 'images', 'uploads', updatedTicket.profilePicture)) : null;
 
     try {
         const newInvitationCode = generateInvitationCode();
-        const attendeesPath = path.join('data', 'attendees.json');
+        const attendeesPath = path.join('..', 'data', 'attendees.json');
         let attendees = JSON.parse(fs.readFileSync(attendeesPath, 'utf8'));
 
         const oldInvitationCode = updatedTicket.invitationCode;
-        const oldTicketPath = path.join('data', 'tickets', `${oldInvitationCode}.png`);
+        const oldTicketPath = path.join('..', 'data', 'tickets', `${oldInvitationCode}.png`);
         if (fs.existsSync(oldTicketPath)) {
             fs.unlinkSync(oldTicketPath);
         }
@@ -104,7 +104,7 @@ export default async function handler(req, res) {
         ctx.textAlign = 'center';
         ctx.fillText("Ya'll better pull up, we'll be pleased", canvasWidth / 2, canvasHeight - 62);
 
-        const newTicketPath = path.join('data', 'tickets', `${newInvitationCode}.png`);
+        const newTicketPath = path.join('..', 'data', 'tickets', `${newInvitationCode}.png`);
         const buffer = canvas.toBuffer('image/png');
         fs.writeFileSync(newTicketPath, buffer);
 

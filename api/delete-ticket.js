@@ -10,12 +10,12 @@ export default async function handler(req, res) {
             return;
         }
         try {
-            const attendeesPath = path.join('data', 'attendees.json');
+            const attendeesPath = path.join('..', 'data', 'attendees.json');
             let attendees = JSON.parse(fs.readFileSync(attendeesPath, 'utf8'));
             attendees = attendees.filter(ticket => ticket.invitationCode !== invitationCode);
             fs.writeFileSync(attendeesPath, JSON.stringify(attendees, null, 2));
             
-            const ticketPath = path.join('data', 'tickets', `${invitationCode}.png`);
+            const ticketPath = path.join('..', 'data', 'tickets', `${invitationCode}.png`);
             if (fs.existsSync(ticketPath)) {
                 fs.unlinkSync(ticketPath);
             }

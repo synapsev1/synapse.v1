@@ -4,7 +4,7 @@ import fs from 'fs';
 export default async function handler(req, res) {
     if (req.method === 'POST') {
         try {
-            const attendeesPath = path.join('data', 'attendees.json');
+            const attendeesPath = path.join('..', 'data', 'attendees.json');
             fs.writeFileSync(attendeesPath, JSON.stringify([], null, 2));
             const ticketsDir = path.join('data', 'tickets');
             fs.readdirSync(ticketsDir).forEach(file => fs.unlinkSync(path.join(ticketsDir, file)));

@@ -5,7 +5,7 @@ import fs from 'fs';
 export default async function handler(req, res) {
     if (req.method === 'GET') {
         try {
-            const attendeesPath = path.join('data', 'attendees.json');
+            const attendeesPath = path.join('..', 'data', 'attendees.json');
             const attendees = fs.existsSync(attendeesPath) ? JSON.parse(fs.readFileSync(attendeesPath, 'utf8')) : [];
             res.statusCode = 200;
             res.json(attendees);

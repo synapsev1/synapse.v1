@@ -42,7 +42,7 @@ export default async function handler(req, res) {
             alreadyEntered: false
         };
 
-        const attendeesPath = path.join('data', 'attendees.json');
+        const attendeesPath = path.join('..', 'data', 'attendees.json');
         let attendees = [];
         if (fs.existsSync(attendeesPath)) {
             attendees = JSON.parse(fs.readFileSync(attendeesPath, 'utf8'));

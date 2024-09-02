@@ -10,7 +10,7 @@ export default async function handler(req, res) {
             return;
         }
         try {
-            const attendeesPath = path.join('data', 'attendees.json');
+            const attendeesPath = path.join('..', 'data', 'attendees.json');
             const attendees = JSON.parse(fs.readFileSync(attendeesPath, 'utf8'));
             const ticket = attendees.find(ticket => ticket.invitationCode === invitationCode);
             res.statusCode = ticket ? 200 : 404;

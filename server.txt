@@ -8,7 +8,6 @@ const app = express();
 const PORT = 3000;
 const ADMIN_USER = 'admin';
 const ADMIN_PASS = 'admin_kushal123';
-const session = require('express-session');
 
 const storage = multer.memoryStorage();
 
@@ -18,49 +17,24 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-app.post('/login', (req, res) => {
+app.post('/api/login', (req, res) => {
     const { username, password } = req.body;
     if (username === ADMIN_USER && password === ADMIN_PASS) {
+        
+        
         res.redirect('/dashboard.html');
     } else {
         res.status(401).send('Invalid credentials');
     }
 });
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({
-    secret: 'lifeisbutadream', // Replace with a strong secret
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } // Set to true if using HTTPS
-}));
-
-app.post('/login', (req, res) => {
-    // Validate user credentials (replace with your actual validation logic)
-    if (req.body.username === ADMIN_USER && req.body.password === ADMIN_PASS) {
-        req.session.user = { username: req.body.username }; // Store user info in session
-        res.redirect('/dashboard.html'); // Redirect to dashboard after successful login
-    } else {
-        res.redirect('/login.html'); // Redirect back to login on failure
-    }
-});
-
-app.use((req, res, next) => {
-    if (req.session.user && req.url === '/') {
-        res.redirect('/dashboard.html');
-    } else {
-        next();
-    }
-});
-
-app.get('/check-login', (req, res) => {
+app.get('/dashboard.html', (req, res) => {
     if (req.session.user) {
-        res.json({ loggedIn: true });
+        res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
     } else {
-        res.json({ loggedIn: false });
+        res.redirect('/');
     }
 });
-
 // Register the custom font
 registerFont(path.resolve(__dirname, 'public', 'fonts', 'Expansiva bold.otf'), { family: 'ExpansivaBold' });
 registerFont(path.resolve(__dirname, 'public', 'fonts', 'Expansiva.otf'), { family: 'Expansiva' });
@@ -278,6 +252,9 @@ app.post('/update-ticket', upload.single('profilePicture'), async (req, res) => 
         res.status(500).send('Internal Server Error');
     }
 });
+
+
+
 
 
 

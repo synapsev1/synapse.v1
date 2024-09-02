@@ -9,26 +9,11 @@
 <body>
     <div class="login-form">
         <h2>Login</h2>
-        <form action="/login" method="post">
+        <form action="/api/login" method="post">
             <input type="text" name="username" placeholder="Username" required>
             <input type="password" name="password" placeholder="Password" required>
             <input type="submit" value="Login">
         </form>
     </div>
-    <script>
-        // Function to check if user is logged in
-        function checkLoginStatus() {
-            fetch('/check-login') // A route to check login status
-                .then(response => response.json())
-                .then(data => {
-                    if (data.loggedIn) {
-                        window.location.href = '/dashboard.html';
-                    }
-                });
-        }
-
-        // Call the function on page load
-        document.addEventListener('DOMContentLoaded', checkLoginStatus);
-    </script>
 </body>
 </html>

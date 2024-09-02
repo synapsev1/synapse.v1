@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentInviteCode = inviteCode;
 
         try {
-            const response = await fetch('/validate-invitation-code', {
+            const response = await fetch('/api/validate-invitation-code', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Submit the invite code for final verification
         try {
-            const response = await fetch('/verify-invite-code', {
+            const response = await fetch('/api/verify-invite-code', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

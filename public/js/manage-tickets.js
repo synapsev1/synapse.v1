@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const response = await fetch('/attendees');
+    const response = await fetch('/api/attendees');
     const attendees = await response.json();
     const ticketList = document.getElementById('ticketList');
 
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('clearAll').addEventListener('click', async () => {
         if (confirm('Are you sure? This action cannot be undone.')) {
             try {
-                const response = await fetch('/clear-tickets', {
+                const response = await fetch('/api/clear-tickets', {
                     method: 'POST'
                 });
                 
@@ -104,7 +104,7 @@ function showFullTicket(attendee) {
         event.preventDefault();
         const formData = new FormData(document.getElementById('editTicketForm'));
         try {
-            const response = await fetch('/update-ticket', {
+            const response = await fetch('/api/update-ticket', {
                 method: 'POST',
                 body: formData
             });
@@ -123,7 +123,7 @@ function showFullTicket(attendee) {
     const deleteTicketButton = document.querySelector('#editTicketForm .button[type="button"]');
     deleteTicketButton.addEventListener('click', async () => {
         if (confirm('Are you sure you want to delete this ticket?')) {
-            const response = await fetch('/delete-ticket', {
+            const response = await fetch('/api/delete-ticket', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

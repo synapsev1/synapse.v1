@@ -1,25 +1,34 @@
-import fs from 'fs';
 import path from 'path';
+import fs from 'fs';
 
-export default function handler(req, res) {
-    if (req.method === 'POST') {
-        const { invitationCode } = req.body;
-
-        if (!invitationCode) return res.status(400).send('Invitation code is required');
-
-        const attendeesPath = path.join(process.cwd(), 'data', 'attendees.json');
-        let attendees = JSON.parse(fs.readFileSync(attendeesPath, 'utf8'));
-
-        const ticketPath = path.join(process.cwd(), 'data', 'tickets', `${invitationCode}.png`);
-        if (fs.existsSync(ticketPath)) {
-            fs.unlinkSync(ticketPath);
+export default async function handler(req, res) {
+    if (req.method === 'DELETE') {
+        const { invitationCode } = req.query;
+        if (!invitationCode) {
+            res.statusCode = 400;
+            res.end('Invitation code is required');
+            return;
         }
+        try {
+            const attendeesPath = path.join('data', 'attendees.json');
+            let attendees = JSON.parse(fs.readFileSync(attendeesPath, 'utf8'));
+            attendees = attendees.filter(ticket => ticket.invitationCode !== invitationCode);
+            fs.writeFileSync(attendeesPath, JSON.stringify(attendees, null, 2));
+            
+            const ticketPath = path.join('data', 'tickets', `${invitationCode}.png`);
+            if (fs.existsSync(ticketPath)) {
+                fs.unlinkSync(ticketPath);
+            }
 
-        attendees = attendees.filter(ticket => ticket.invitationCode !== invitationCode);
-        fs.writeFileSync(attendeesPath, JSON.stringify(attendees, null, 2));
-
-        res.redirect('/manage-tickets.html');
+            res.statusCode = 200;
+            res.end('Ticket deleted');
+        } catch (error) {
+            console.error('Error deleting ticket:', error);
+            res.statusCode = 500;
+            res.end('Internal Server Error');
+        }
     } else {
-        res.status(405).send('Method Not Allowed');
+        res.statusCode = 405;
+        res.end('Method Not Allowed');
     }
 }

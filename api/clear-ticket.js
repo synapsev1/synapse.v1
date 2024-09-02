@@ -1,16 +1,22 @@
-import fs from 'fs';
 import path from 'path';
+import fs from 'fs';
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
     if (req.method === 'POST') {
-        const attendeesPath = path.join(process.cwd(), 'data', 'attendees.json');
-        const ticketsDir = path.join(process.cwd(), 'data', 'tickets');
-
-        fs.writeFileSync(attendeesPath, JSON.stringify([], null, 2));
-        fs.readdirSync(ticketsDir).forEach(file => fs.unlinkSync(path.join(ticketsDir, file)));
-
-        res.redirect('/manage-tickets.html');
+        try {
+            const attendeesPath = path.join('data', 'attendees.json');
+            fs.writeFileSync(attendeesPath, JSON.stringify([], null, 2));
+            const ticketsDir = path.join('data', 'tickets');
+            fs.readdirSync(ticketsDir).forEach(file => fs.unlinkSync(path.join(ticketsDir, file)));
+            res.statusCode = 200;
+            res.end('Tickets cleared');
+        } catch (error) {
+            console.error('Error clearing tickets:', error);
+            res.statusCode = 500;
+            res.end('Internal Server Error');
+        }
     } else {
-        res.status(405).send('Method Not Allowed');
+        res.statusCode = 405;
+        res.end('Method Not Allowed');
     }
 }

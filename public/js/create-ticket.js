@@ -2,7 +2,7 @@ document.getElementById('createTicketForm').addEventListener('submit', async fun
     event.preventDefault();
     const formData = new FormData(this);
     try {
-        const response = await fetch('/create-ticket', {
+        const response = await fetch('/api/create-ticket', {
             method: 'POST',
             body: formData
         });

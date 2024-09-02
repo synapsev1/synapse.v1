@@ -3,3 +3,4 @@ package-lock.json
 ex-server.js.txt
 data/.gitkeep
 server.js
+.vercel
